@@ -32,7 +32,7 @@ import utils
 import shutil
 from utils import _
 import item_repo
-import clogger
+from clogger import log
 
 # FIXME: add --quiet depending on if not --verbose?
 RSYNC_CMD =  "rsync -a %s '%s' %s/ks_mirror/%s --exclude-from=/etc/cobbler/rsync.exclude --progress"
@@ -65,7 +65,7 @@ class Importer:
        self.breed = breed
        self.os_version = os_version
        if logger is None:
-           logger       = clogger.Logger()
+           logger       = log
        self.logger      = logger
 
 

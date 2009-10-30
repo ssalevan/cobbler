@@ -37,7 +37,7 @@ from cexceptions import *
 import traceback
 import errno
 from utils import _
-import clogger
+from clogger import log
 
 class RepoSync:
     """
@@ -64,7 +64,7 @@ class RepoSync:
         self.logger    = logger
 
         if logger is None:
-           self.logger = clogger.Logger()
+           self.logger       = log
 
         self.logger.info("hello, reposync")
 

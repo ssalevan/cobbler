@@ -320,6 +320,9 @@ class CobblerXMLRPCInterface:
         self.events[event_id] = [ float(time.time()), str(name), EVENT_RUNNING, [] ]
         
         self._log("start_task(%s); event_id(%s)"%(name,event_id))
+
+        # TODO: This is the last use of this homebrew logger, would be nice 
+        # to drop it completely.
         logatron = clogger.Logger("/var/log/cobbler/tasks/%s.log" % event_id)
 
         thr_obj = CobblerThread(event_id,self,logatron,args)

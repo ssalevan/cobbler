@@ -42,7 +42,7 @@ import time
 import netaddr
 import shlex
 import field_info
-import clogger
+from clogger import log
 import yaml
 
 try:
@@ -106,9 +106,7 @@ MODULE_CACHE = {}
 _re_kernel = re.compile(r'(vmlinu[xz]|kernel.img)')
 _re_initrd = re.compile(r'(initrd(.*).img|ramdisk.image.gz)')
 
-# all logging from utils.die goes to the main log even if there
-# is another log.
-main_logger = clogger.Logger()
+main_logger = log
 
 def die(logger, msg):
 

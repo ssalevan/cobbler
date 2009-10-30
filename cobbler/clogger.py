@@ -30,6 +30,31 @@ WARNING = "WARNING"
 DEBUG   = "DEBUG"
 INFO    = "INFO"
 
+import logging
+
+DEFAULT_LOGFILE = "/var/log/cobbler/cobbler.log"
+
+LEVELS = {'debug': logging.DEBUG,
+          'info': logging.INFO,
+          'warning': logging.WARNING,
+          'error': logging.ERROR,
+          'critical': logging.CRITICAL}
+
+def setup_logging():
+    # TODO: expose a way to set these options?
+    filename = DEFAULT_LOGFILE
+    # I don't think the old logger supported customizing the level,
+    # so we'll assume starting at debug for now.
+    level = "debug"
+
+    log_level = LEVELS[level.lower()]
+    logging.basicConfig(filename=filename, level=log_level, filemode='w',
+            format="%(asctime)s %(name)s %(levelname)s - %(message)s (%(module)s/%(lineno)d)")
+
+log = logging.getLogger("cobbler")
+
+
+# DEPRECATED: Please do not use this.
 class Logger:
 
    def __init__(self, logfile="/var/log/cobbler/cobbler.log"):
@@ -44,7 +69,6 @@ class Logger:
       else:
          self.logfile = open(logfile, "a")
       
-
    def warning(self, msg):
       self.__write(WARNING, msg)
 

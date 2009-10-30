@@ -32,7 +32,7 @@ import re
 import utils
 from cexceptions import *
 from utils import _
-import clogger
+from clogger import log
 
 # FIXME: lots of overlap with pxegen.py, should consolidate
 # FIXME: disable timeouts and remove local boot for this?
@@ -73,7 +73,7 @@ class BuildIso:
         self.distctr     = 0
         self.source      = ""
         if logger is None:
-            logger       = clogger.Logger()
+            logger       = log
         self.logger      = logger
 
 

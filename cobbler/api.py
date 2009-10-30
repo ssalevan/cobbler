@@ -53,7 +53,7 @@ import os
 import xmlrpclib
 import traceback
 import exceptions
-import clogger
+from clogger import log
 
 import item_distro
 import item_profile
@@ -104,7 +104,7 @@ class BootAPI:
             self.is_cobblerd = is_cobblerd
 
             try:
-                self.logger = clogger.Logger("/var/log/cobbler/cobbler.log")
+                self.logger = log
             except CX:
                 # return to CLI/other but perms are not valid
                 # perms_ok is False

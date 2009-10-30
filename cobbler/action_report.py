@@ -17,7 +17,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 import re
 from cexceptions import *
 import utils
-import clogger
+from clogger import log
 
 class Report:
 
@@ -35,7 +35,7 @@ class Report:
         self.report_noheaders = None
         self.array_re = re.compile('([^[]+)\[([^]]+)\]')
         if logger is None:
-            logger       = clogger.Logger()
+            logger       = log
         self.logger      = logger
 
 

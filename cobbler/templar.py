@@ -29,7 +29,7 @@ from cexceptions import *
 from template_api import Template
 from utils import *
 import utils
-import clogger
+from clogger import log
 
 class Templar:
 
@@ -39,7 +39,7 @@ class Templar:
         """
 
         if logger is None:
-            logger = clogger.Logger()
+            logger       = log
         self.logger = logger
 
         if config is not None:

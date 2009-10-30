@@ -28,7 +28,7 @@ import api as cobbler_api
 import utils
 from utils import _
 from cexceptions import *
-import clogger
+from clogger import log
 import fnmatch
 
 OBJ_TYPES = [ "distro", "profile", "system", "repo", "image" ]
@@ -45,7 +45,7 @@ class Replicate:
         self.remote   = None
         self.uri      = None
         if logger is None:
-           logger     = clogger.Logger()
+           logger       = log
         self.logger   = logger
 
     def rsync_it(self,from_path,to_path):

@@ -27,7 +27,7 @@ import action_sync
 import utils
 import glob
 from utils import _
-import clogger
+from clogger import log
 
 class BootCheck:
 
@@ -38,7 +38,7 @@ class BootCheck:
        self.config   = config
        self.settings = config.settings()
        if logger is None:
-           logger       = clogger.Logger()
+            logger       = log
        self.logger      = logger
 
 

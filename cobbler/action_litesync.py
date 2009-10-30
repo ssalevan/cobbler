@@ -28,7 +28,7 @@ import os.path
 
 import utils
 import traceback
-import clogger
+from clogger import log
 
 class BootLiteSync:
     """
@@ -48,7 +48,7 @@ class BootLiteSync:
         self.settings    = config.settings()
         self.repos       = config.repos()
         if logger is None:
-            logger = clogger.Logger()
+            logger       = log
         self.logger      = logger
         self.sync        = config.api.get_sync(verbose,logger=self.logger)
         self.sync.make_tftpboot()

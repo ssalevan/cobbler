@@ -25,7 +25,7 @@ import re
 from utils import _
 import utils
 import kickgen
-import clogger
+from clogger import log
 
 class Validate:
 
@@ -37,7 +37,7 @@ class Validate:
         self.settings = config.settings()
         self.kickgen  = kickgen.KickGen(config)
         if logger is None:
-            logger       = clogger.Logger()
+            logger       = log
         self.logger      = logger
 
 

@@ -33,7 +33,7 @@ import errno
 import utils
 from cexceptions import *
 from utils import _
-import clogger
+from cobbler.clogger import log
 
 class AclConfig:
 
@@ -45,7 +45,7 @@ class AclConfig:
         self.api         = config.api
         self.settings    = config.settings()
         if logger is None:
-            logger       = clogger.Logger()
+            logger       = log
         self.logger      = logger
 
     def run(self,adduser=None,addgroup=None,removeuser=None,removegroup=None):

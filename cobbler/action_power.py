@@ -35,7 +35,7 @@ import utils
 import func_utils
 from cexceptions import *
 import templar
-import clogger
+from clogger import log
 
 class PowerTool:
     """
@@ -54,7 +54,7 @@ class PowerTool:
         self.force_user  = force_user
         self.force_pass  = force_pass
         if logger is None:
-            logger = clogger.Logger()
+            logger       = log
         self.logger      = logger
 
     def power(self, desired_state):

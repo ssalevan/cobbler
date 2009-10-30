@@ -40,7 +40,7 @@ import item_profile
 import item_repo
 import item_system
 from Cheetah.Template import Template
-import clogger
+from clogger import log
 from utils import _
 
 
@@ -56,7 +56,7 @@ class BootSync:
 
         self.logger         = logger
         if logger is None:
-            self.logger     = clogger.Logger()
+            self.logger       = log
 
         self.verbose      = verbose
         self.config       = config
