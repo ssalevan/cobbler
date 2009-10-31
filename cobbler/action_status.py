@@ -28,6 +28,7 @@ import time
 import api as cobbler_api
 from clogger import log
 import utils
+from action import BaseAction
 
 #from utils import _
 
@@ -39,20 +40,17 @@ SEEN_START         = 3
 SEEN_STOP          = 4
 STATE              = 5
 
-class BootStatusReport:
+class BootStatusReport(BaseAction):
 
   
     def __init__(self,config,mode,logger=None):
         """
         Constructor
         """
-        self.config   = config
-        self.settings = config.settings()
+        BaseAction.__init__(self, config, logger)
+
         self.ip_data  = {}
         self.mode     = mode
-        if logger is None:
-            logger       = log
-        self.logger      = logger
 
 
     # -------------------------------------------------------

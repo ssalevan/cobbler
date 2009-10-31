@@ -42,9 +42,10 @@ import item_system
 from Cheetah.Template import Template
 from clogger import log
 from utils import _
+from action import BaseAction
 
 
-class BootSync:
+class BootSync(BaseAction):
     """
     Handles conversion of internal state to the tftpboot tree layout
     """
@@ -53,18 +54,12 @@ class BootSync:
         """
         Constructor
         """
-
-        self.logger         = logger
-        if logger is None:
-            self.logger       = log
+        BaseAction.__init__(self, config, logger)
 
         self.verbose      = verbose
-        self.config       = config
-        self.api          = config.api
         self.distros      = config.distros()
         self.profiles     = config.profiles()
         self.systems      = config.systems()
-        self.settings     = config.settings()
         self.repos        = config.repos()
         self.templar      = templar.Templar(config, self.logger)
         self.pxegen       = pxegen.PXEGen(config, self.logger)

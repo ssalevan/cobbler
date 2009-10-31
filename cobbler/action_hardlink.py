@@ -23,21 +23,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 import os
 import utils
 from cexceptions import *
-from clogger import log
+from action import BaseAction
 
-class HardLinker:
+class HardLinker(BaseAction):
 
     def __init__(self,config,logger=None):
         """
         Constructor
         """
-        #self.config   = config
-        #self.api      = config.api
-        #self.settings = config.settings()
-        if logger is None:
-            logger       = log
-        self.logger      = logger
-
+        BaseAction.__init__(self, config, logger)
 
     def run(self):
         """

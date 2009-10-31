@@ -28,9 +28,9 @@ import os.path
 
 import utils
 import traceback
-from clogger import log
+from action import BaseAction
 
-class BootLiteSync:
+class BootLiteSync(BaseAction):
     """
     Handles conversion of internal state to the tftpboot tree layout
     """
@@ -39,17 +39,14 @@ class BootLiteSync:
         """
         Constructor
         """
+        BaseAction.__init__(self, config, logger)
+
         self.verbose     = verbose
-        self.config      = config
         self.distros     = config.distros()
         self.profiles    = config.profiles()
         self.systems     = config.systems()
         self.images      = config.images()
-        self.settings    = config.settings()
         self.repos       = config.repos()
-        if logger is None:
-            logger       = log
-        self.logger      = logger
         self.sync        = config.api.get_sync(verbose,logger=self.logger)
         self.sync.make_tftpboot()
 

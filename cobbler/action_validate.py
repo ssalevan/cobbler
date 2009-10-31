@@ -25,7 +25,7 @@ import re
 from utils import _
 import utils
 import kickgen
-from clogger import log
+from action import BaseAction
 
 class Validate:
 
@@ -33,6 +33,8 @@ class Validate:
         """
         Constructor
         """
+        BaseAction.__init__(self, config, logger)
+
         self.config   = config
         self.settings = config.settings()
         self.kickgen  = kickgen.KickGen(config)

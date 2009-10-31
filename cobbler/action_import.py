@@ -32,12 +32,12 @@ import utils
 import shutil
 from utils import _
 import item_repo
-from clogger import log
+from action import BaseAction
 
 # FIXME: add --quiet depending on if not --verbose?
 RSYNC_CMD =  "rsync -a %s '%s' %s/ks_mirror/%s --exclude-from=/etc/cobbler/rsync.exclude --progress"
 
-class Importer:
+class Importer(BaseAction):
 
    def __init__(self,api,config,mirror,mirror_name,network_root=None,kickstart_file=None,rsync_flags=None,arch=None,breed=None,os_version=None,logger=None):
        """
@@ -50,23 +50,20 @@ class Importer:
        cobbler's http directory.  This is explained in more detail 
        in the manpage.  Leave network_root to None if want mirroring.
        """
-       self.api = api
-       self.config = config
+       BaseAction.__init__(self, config, logger)
+
        self.mirror = mirror
        self.mirror_name = mirror_name
        self.network_root = network_root 
        self.distros  = config.distros()
        self.profiles = config.profiles()
        self.systems  = config.systems()
-       self.settings = config.settings()
+
        self.kickstart_file = kickstart_file
        self.rsync_flags = rsync_flags
        self.arch = arch
        self.breed = breed
        self.os_version = os_version
-       if logger is None:
-           logger       = log
-       self.logger      = logger
 
 
    # ========================================================================

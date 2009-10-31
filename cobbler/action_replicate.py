@@ -28,25 +28,21 @@ import api as cobbler_api
 import utils
 from utils import _
 from cexceptions import *
-from clogger import log
 import fnmatch
+from action import BaseAction
 
 OBJ_TYPES = [ "distro", "profile", "system", "repo", "image" ]
 
-class Replicate:
+class Replicate(BaseAction):
 
     def __init__(self,config,logger=None):
         """
         Constructor
         """
-        self.config   = config
-        self.settings = config.settings()
-        self.api      = config.api
+        BaseAction.__init__(self, config, logger)
+
         self.remote   = None
         self.uri      = None
-        if logger is None:
-           logger       = log
-        self.logger   = logger
 
     def rsync_it(self,from_path,to_path):
         from_path = "%s::%s" % (self.host, from_path)

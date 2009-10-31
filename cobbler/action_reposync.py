@@ -37,9 +37,9 @@ from cexceptions import *
 import traceback
 import errno
 from utils import _
-from clogger import log
+from action import BaseAction
 
-class RepoSync:
+class RepoSync(BaseAction):
     """
     Handles conversion of internal state to the tftpboot tree layout
     """
@@ -50,21 +50,17 @@ class RepoSync:
         """
         Constructor
         """
+        BaseAction.__init__(self, config, logger)
+
         self.verbose   = True
-        self.api       = config.api
-        self.config    = config
+
         self.distros   = config.distros()
         self.profiles  = config.profiles()
         self.systems   = config.systems()
-        self.settings  = config.settings()
         self.repos     = config.repos()
         self.rflags    = self.settings.reposync_flags
         self.tries     = tries
         self.nofail    = nofail
-        self.logger    = logger
-
-        if logger is None:
-           self.logger       = log
 
         self.logger.info("hello, reposync")
 

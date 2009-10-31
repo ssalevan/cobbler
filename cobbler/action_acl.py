@@ -33,21 +33,16 @@ import errno
 import utils
 from cexceptions import *
 from utils import _
-from cobbler.clogger import log
+from action import BaseAction
 
-class AclConfig:
+class AclConfig(BaseAction):
 
     def __init__(self,config,logger=None):
         """
         Constructor
         """
-        self.config      = config
-        self.api         = config.api
-        self.settings    = config.settings()
-        if logger is None:
-            logger       = log
-        self.logger      = logger
-
+        BaseAction.__init__(self, config, logger)
+        
     def run(self,adduser=None,addgroup=None,removeuser=None,removegroup=None):
         """
         Automate setfacl commands

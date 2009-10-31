@@ -22,20 +22,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 
 import os
 import urlgrabber
-from clogger import log
+from action import BaseAction
 
-class ContentDownloader:
+class ContentDownloader(BaseAction):
 
    def __init__(self,config,logger=None):
        """
        Constructor
        """
-       self.config   = config
-       self.settings = config.settings()
-       if logger is None:
-           logger       = log
-       self.logger      = logger
-
+       BaseAction.__init__(self, config, logger)
 
    def run(self,force=False):
        """

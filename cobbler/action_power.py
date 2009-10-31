@@ -35,9 +35,9 @@ import utils
 import func_utils
 from cexceptions import *
 import templar
-from clogger import log
+from action import BaseAction
 
-class PowerTool:
+class PowerTool(BaseAction):
     """
     Handles conversion of internal state to the tftpboot tree layout
     """
@@ -46,16 +46,12 @@ class PowerTool:
         """
         Power library constructor requires a cobbler system object.
         """
+        BaseAction.__init__(self, config, logger)
+
         self.system      = system
-        self.config      = config
-        self.settings    = config.settings()
-        self.api         = api
-        self.logger      = self.api.logger
+
         self.force_user  = force_user
         self.force_pass  = force_pass
-        if logger is None:
-            logger       = log
-        self.logger      = logger
 
     def power(self, desired_state):
         """

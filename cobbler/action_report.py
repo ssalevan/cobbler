@@ -17,27 +17,22 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 import re
 from cexceptions import *
 import utils
-from clogger import log
+from action import BaseAction
 
-class Report:
+class Report(BaseAction):
 
     def __init__(self, config, logger=None):
         """
         Constructor
         """
-        self.config = config
-        self.settings = config.settings()
-        self.api = config.api
+        BaseAction.__init__(self, config, logger)
+
         self.report_type = None
         self.report_what = None
         self.report_name = None
         self.report_fields = None
         self.report_noheaders = None
         self.array_re = re.compile('([^[]+)\[([^]]+)\]')
-        if logger is None:
-            logger       = log
-        self.logger      = logger
-
 
     def fielder(self, structure, fields_list):
         """

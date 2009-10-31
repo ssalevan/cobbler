@@ -32,7 +32,7 @@ import re
 import utils
 from cexceptions import *
 from utils import _
-from clogger import log
+from action import BaseAction
 
 # FIXME: lots of overlap with pxegen.py, should consolidate
 # FIXME: disable timeouts and remove local boot for this?
@@ -53,7 +53,7 @@ LABEL local
 
 """
 
-class BuildIso:
+class BuildIso(BaseAction):
     """
     Handles conversion of internal state to the tftpboot tree layout
     """
@@ -62,9 +62,10 @@ class BuildIso:
         """
         Constructor
         """
+        BaseAction.__init__(self, config, logger)
+
         self.verbose     = verbose
-        self.config      = config
-        self.api         = config.api
+
         self.distros     = config.distros()
         self.profiles    = config.profiles()
         self.systems     = config.systems()
@@ -72,10 +73,6 @@ class BuildIso:
         self.distmap     = {}
         self.distctr     = 0
         self.source      = ""
-        if logger is None:
-            logger       = log
-        self.logger      = logger
-
 
     def make_shorter(self,distname):
         if self.distmap.has_key(distname):

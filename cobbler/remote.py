@@ -48,8 +48,8 @@ import item_system
 import item_repo
 import item_image
 import clogger
+from clogger import log
 import utils
-#from utils import * # BAD!
 from utils import _
 
 import sub_process
@@ -76,11 +76,16 @@ REMAP_COMPAT = {
 }
 
 class CobblerThread(Thread):
-    def __init__(self,event_id,remote,logatron,options):
+    def __init__(self, event_id, remote, options):
         Thread.__init__(self)
         self.event_id        = event_id
         self.remote          = remote
-        self.logger          = logatron
+
+        # TODO: This is the last use of this homebrew logger, would be nice 
+        # to drop it completely.
+        self.logger = clogger.Logger("/var/log/cobbler/tasks/%s.log" % event_id)
+
+
         if options is None:
             options = {}
         self.options         = options
@@ -321,11 +326,7 @@ class CobblerXMLRPCInterface:
         
         self._log("start_task(%s); event_id(%s)"%(name,event_id))
 
-        # TODO: This is the last use of this homebrew logger, would be nice 
-        # to drop it completely.
-        logatron = clogger.Logger("/var/log/cobbler/tasks/%s.log" % event_id)
-
-        thr_obj = CobblerThread(event_id,self,logatron,args)
+        thr_obj = CobblerThread(event_id, self, args)
         thr_obj._run = thr_obj_fn
         if on_done is not None:
            thr_obj.on_done = on_done

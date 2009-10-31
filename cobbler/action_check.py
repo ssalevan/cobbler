@@ -27,20 +27,15 @@ import action_sync
 import utils
 import glob
 from utils import _
-from clogger import log
+from action import BaseAction
 
-class BootCheck:
+class BootCheck(BaseAction):
 
    def __init__(self,config,logger=None):
        """
        Constructor
        """
-       self.config   = config
-       self.settings = config.settings()
-       if logger is None:
-            logger       = log
-       self.logger      = logger
-
+       BaseAction.__init__(self, config, logger)
 
    def run(self):
        """
